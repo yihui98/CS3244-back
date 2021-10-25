@@ -16,7 +16,7 @@ async function loadModel(){
     try{
         const handler = tfn.io.fileSystem('./model/model.json');
         const model = await tf.loadLayersModel(handler);
-        console.log('Model loaded')
+        //console.log('Model loaded')
         //console.log(model.summary())
         return model
     } catch (err){
@@ -32,7 +32,7 @@ function tokenizeSentence(sentence){
       tokenSentence.push(word2index[sentence[i].toLowerCase()])
   }
 }
-  console.log(tokenSentence);
+  //console.log(tokenSentence);
   return tokenSentence
 }
 
@@ -51,13 +51,13 @@ function padSequence(seq, maxLen = 50, value = 0) { //padding = 'post', truncati
 
 let rawdata = fs.readFileSync('./model/word2index.json')
 let word2index = JSON.parse(rawdata)
-console.log(typeof(word2index))
+//console.log(typeof(word2index))
 
 app.get('/model/:query', async (request, response) => {
   const model = await loadModel();
   const text = request.params.query;
   const inputText = text.trim().toLowerCase().replace(/(\.|\,|\!)/g, '').split(' ');
-  console.log(inputText);
+  //console.log(inputText);
   const tokenizedSentence = tokenizeSentence(inputText);
   paddedSequence = padSequence(Array.from(tokenizedSentence))
   //console.log(paddedSequence)
@@ -65,7 +65,7 @@ app.get('/model/:query', async (request, response) => {
   //console.log(input)
   const prediction = model.predict(input)
   const score = prediction.dataSync()[0]
-  console.log(prediction.dataSync()[0])
+  //console.log(prediction.dataSync()[0])
   response.json({score : score})
 })
 
