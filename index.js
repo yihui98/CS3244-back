@@ -7,6 +7,7 @@ const tfn = require("@tensorflow/tfjs-node");
 const fs = require('fs');
 //import {OOV_INDEX, padSequences} from './utilsutils';
 const app = express()
+require('dotenv').config()
 
 app.use(express.static('build'))
 app.use(cors())
@@ -70,6 +71,6 @@ app.get('/model/:query', async (request, response) => {
 })
 
 
-const PORT = 3001
+const PORT = process.env.PORT || 3001
 app.listen(PORT)
 console.log(`Server running on port ${PORT}`)
