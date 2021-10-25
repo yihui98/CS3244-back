@@ -5,9 +5,10 @@ const cors = require('cors')
 const tf = require("@tensorflow/tfjs");
 const tfn = require("@tensorflow/tfjs-node");
 const fs = require('fs');
+require('dotenv').config()
 //import {OOV_INDEX, padSequences} from './utilsutils';
 const app = express()
-require('dotenv').config()
+
 
 app.use(express.static('build'))
 app.use(cors())
