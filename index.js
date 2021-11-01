@@ -1,6 +1,7 @@
 const http = require('http')
 const express = require('express')
 const cors = require('cors')
+//const path = require(“path”);
 
 const tf = require("@tensorflow/tfjs");
 const tfn = require("@tensorflow/tfjs-node");
@@ -13,6 +14,7 @@ const app = express()
 app.use(express.static('build'))
 app.use(cors())
 app.use(express.json())
+//app.use(express.static(path.join(__dirname, 'client/build')))
 
 async function loadModel(){
     try{
